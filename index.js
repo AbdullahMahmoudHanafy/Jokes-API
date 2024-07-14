@@ -66,8 +66,15 @@ app.patch("/jokes/:id", (req, res) => {
     res.json(newJoke)
   }else res.json("There is no joke matchin this id.")
 })
-//6. PATCH a joke
 
+app.delete("/jokes/:id", (req, res) => {
+  const specificId = parseInt(req.params.id);
+
+  if(specificId <= jokes.length && specificId > 0){
+  jokes.splice(specificId - 1, 1);
+  res.sendStatus(200);
+  }else res.json("There is no joke matchin this id.");
+})
 //7. DELETE Specific joke
 
 //8. DELETE All jokes
