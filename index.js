@@ -7,6 +7,25 @@ const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get("/random", (req, res) => {
+  const index = Math.floor(Math.random() * jokes.length());
+  res.json(jokes[index]);
+})
+
+//2. GET a specific joke
+
+//3. GET a jokes by filtering on the joke type
+
+//4. POST a new joke
+
+//5. PUT a joke
+
+//6. PATCH a joke
+
+//7. DELETE Specific joke
+
+//8. DELETE All jokes
+
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
 });
