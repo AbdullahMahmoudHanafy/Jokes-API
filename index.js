@@ -8,13 +8,13 @@ const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/random", (req, res) => {
-  const index = Math.floor(Math.random() * jokes.length());
+  const index = Math.floor(Math.random() * jokes.length);
   res.json(jokes[index]);
 })
 
 app.get("/jokes/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  if(id <= jokes.length() && id > 0)
+  if(id <= jokes.length && id > 0)
     res.json(jokes[id - 1])
   else res.json("There is no joke matchin this id.");
 })
