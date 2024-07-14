@@ -16,7 +16,7 @@ app.get("/jokes/:id", (req, res) => {
   const id = parseInt(req.params.id);
   if(id <= jokes.length && id > 0)
     res.json(jokes[id - 1])
-  else res.json("There is no joke matchin this id.");
+  else res.status(404).json({error: "There is no joke matchin this id."});
 })
 
 app.get("/filter", (req, res) => {
@@ -49,7 +49,7 @@ app.put("/jokes/:id", (req, res) => {
     jokes[specificId - 1].jokeText = newText;
     jokes[specificId - 1].jokeType = newType;
     res.json(jokes[specificId - 1]);
-  }else res.json("There is no joke matchin this id.")
+  }else res.status(404).json({error: "There is no joke matchin this id."})
 })
 
 app.patch("/jokes/:id", (req, res) => {
@@ -64,7 +64,7 @@ app.patch("/jokes/:id", (req, res) => {
     }
     jokes[specificId - 1] = newJoke;
     res.json(newJoke)
-  }else res.json("There is no joke matchin this id.")
+  }else res.status(404).json({error: "There is no joke matchin this id."})
 })
 
 app.delete("/jokes/:id", (req, res) => {
@@ -73,7 +73,7 @@ app.delete("/jokes/:id", (req, res) => {
   if(specificId <= jokes.length && specificId > 0){
   jokes.splice(specificId - 1, 1);
   res.sendStatus(200);
-  }else res.json("There is no joke matchin this id.");
+  }else res.status(404).json({error: "There is no joke matchin this id."});
 })
 //7. DELETE Specific joke
 
