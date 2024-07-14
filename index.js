@@ -1,4 +1,4 @@
-import express from "express";
+import express, { text } from "express";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -35,11 +35,22 @@ app.post("/jokes", (req, res) => {
     jokeText: req.body.text,
     jokeType: req.body.type
   }
-  jokes.push(newJoke)
-  res.json(newJoke)
+  jokes.push(newJoke);
+  res.json(newJoke);
 })
-//4. POST a new joke
 
+app.put("/jokes/:id", (req, res) => {
+  const specificId = parseInt(req.params.id)
+  const newText = req.body.text
+  const newType = req.body.type
+
+  if(specificId <= jokes.length && specificId > 0)
+  {
+    jokes[specificId - 1].jokeText = newText;
+    jokes[specificId - 1].jokeType = newType;
+    res.json(jokes[specificId - 1]);
+  }else res.json("There is no joke matchin this id.")
+})
 //5. PUT a joke
 
 //6. PATCH a joke
