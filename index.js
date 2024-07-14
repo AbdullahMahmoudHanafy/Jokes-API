@@ -19,6 +19,15 @@ app.get("/jokes/:id", (req, res) => {
   else res.json("There is no joke matchin this id.");
 })
 
+app.get("/filter", (req, res) => {
+  const type = req.query.type;
+  var filteredJokes = [];
+  jokes.forEach(joke => {
+    if(joke.jokeType == type)
+      filteredJokes.push(joke);
+  });
+  res.json(filteredJokes);
+})
 //3. GET a jokes by filtering on the joke type
 
 //4. POST a new joke
