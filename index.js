@@ -51,8 +51,21 @@ app.put("/jokes/:id", (req, res) => {
     res.json(jokes[specificId - 1]);
   }else res.json("There is no joke matchin this id.")
 })
-//5. PUT a joke
 
+app.patch("/jokes/:id", (req, res) => {
+  const specificId = parseInt(req.params.id);
+
+  if(specificId <= jokes.length && specificId > 0){
+    const existingJoke = jokes.find((joke) => joke.id === specificId);
+    const newJoke = {
+      id: specificId,
+      text: req.body.text || existingJoke.jokeText,
+      type: req.body.type || existingJoke.jokeType
+    }
+    jokes[specificId - 1] = newJoke;
+    res.json(newJoke)
+  }else res.json("There is no joke matchin this id.")
+})
 //6. PATCH a joke
 
 //7. DELETE Specific joke
